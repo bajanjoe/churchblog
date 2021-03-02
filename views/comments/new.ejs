@@ -1,0 +1,23 @@
+<% include ../partials/header.ejs%>
+
+<% include ../partials/navbar.ejs%>
+
+<section class="align-items-center mSpacemargin">
+
+    <div class="card card-comments mb-3 wow fadeIn mt-5 mx-5">
+        <div class="card-body">
+
+            <form action="/blog/<%= blog._id %>/comments" method="post">
+                <div class="form-group">
+                    <label for="blogpost">Your comment</label>
+                    <textarea class="form-control" name="comment[text]" rows="5" id="blogpost"> </textarea>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-info btn-sm" type="submit">Post</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>
+<% include ../partials/footer%>

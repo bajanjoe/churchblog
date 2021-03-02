@@ -1,0 +1,66 @@
+<% include ../partials/header.ejs%>
+
+<!--Navbar-->
+<% include ../partials/navbar.ejs%>
+<!--/.Navbar-->
+
+
+<!-- Start your project here--> 
+
+
+    <div class="flex-center flex-column" style="margin-top: 30%;">
+	  <!-- Card One-->
+	 <div class="card" style="width: 42rem;">
+
+	  <!-- Media object, similar to social profile https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg-->
+	    <div class="media" style="width: 42rem; padding-left: 1rem;">
+                <img class="d-flex mr-3" src="https://unsplash.com/photos/MYbhN8KaaEc" alt="Generic placeholder image">
+                <div class="media-body">
+				  <!-- Owner of post -->
+                   <!-- <h5 class="mt-0 font-weight-bold">blog.author.username</h5> -->
+                </div>
+            </div>         
+	   <!-- Media object, similar to social profile-->
+
+<% blogs.forEach(function(blog){ %>
+    <div class="container d-flex justify-content-center">
+
+        <div class="card mt-2 mb-4" style="width: 50%; height: 50%">
+            <!-- Testing empty image object using regex width="320" height="240"-->
+
+            <% var regexVid = RegExp(/(.mp4|.avi|.flv|.wmv|.mov)/); %>
+            <% var regexPng = RegExp(/(.jpg|.png|.gif)/); %>
+
+			   <!-- Card image -->
+           <% if (regexPng.test(blog.image)){%>
+            <img class="card-img-top" src="<%= blog.image %>" alt="Card image cap">
+            <%} if(regexVid.test(blog.image )) {%>
+            <video class="card-img-top" controls>
+                <source src="<%= blog.image %>" type="video/mp4">
+                <source src="<%= blog.image %>" type="video/ogg">
+                Your browser does not support the video tag.
+            </video>
+            <% } %>
+			   <!-- Card image -->
+			    <!-- Card content -->
+            <div class="card-body">
+                <h4 class="card-title"><%= blog.title %></h4>
+              <!--  <p>Owner of post <%= blog.author.username %></p> -->
+                <p class="card-text"><%= blog.body.substring(0, 100) %>...</p>
+                <p class="card-text"><%= blog.created.toDateString() %> </p>
+				 <div class="col-sm">
+                <a href="/blog/<%= blog._id %>" class="btn btn-outline-default btn-rounded waves-effect" style="border-radius: 50px;">Show blog</a>
+				</div>
+            </div>
+        </div>
+		 <!-- Card content -->
+
+		 </div>
+		   <!-- Card One-->
+    </div>
+    <% }); %>
+</div>
+
+
+
+<% include ../partials/blogsFooter.ejs%>
